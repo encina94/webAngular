@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~font-awesome/css/font-awesome.min.css";
+
+@import "~argob-poncho/dist/css/roboto-fontface.css";
+@import "~argob-poncho/dist/css/poncho.css";
+@import '~angular-tree-component/dist/angular-tree-component.css';
+@import "~ngx-bootstrap/datepicker/bs-datepicker.css";
+/* @import "./app/shared/styles/app.scss";
+@import "./app/shared/styles/bootstrap.scss"; */
+
+/* Libreria de style para el combobox ng-select */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+/* Estilos adicionales */
+
+
+.hand {
+  cursor: pointer;
+}
+
+.totalWidth{
+  width: 100%;
+}
+
+/* Estilo para el tamaño del componente de ng-selected */
+.ng-select.custom > .ng-select-container  {
+  min-height: 52px;
+
+}
+
+
+@media (max-width: 414px) {
+    .calendarHeader-xs-margin {
+      margin-left: 54px !important; }
+   }
+/***********STYLOS PARA DATATBLE****************/
+
+
