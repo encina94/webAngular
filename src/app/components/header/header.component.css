@@ -1,0 +1,18 @@
+.button-bgwhite
+{
+  background-color: white !important;
+  
+}
+.button-bgwhite:hover
+{
+  background-color: white !important;
+  color:black !important;
+}
+
+.style-header
+{
+    font-size:10px;
+     margin:0; 
+     padding: 0; 
+     line-height: 11px;
+}

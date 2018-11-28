@@ -3,8 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  envName:"Local",
+  // version: require('../../package.json').version,
+//LOCAL
+  restApiUrl: 'http://localhost:9095/',
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file
