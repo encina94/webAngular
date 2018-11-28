@@ -134,7 +134,7 @@ updateFilter(event) {
 
   //si lo escrito es de tipo string lo paso a minuscula
   var filtro = (typeof event === "string") ? event.toLowerCase() : event;
-  this.temp = this.restItems;
+  this.temp = this.temasMaterias;
 
   //filtro por cualquiera de las 4 columnas
   const temp1 = this.temp.filter(function (d) {
