@@ -19,13 +19,20 @@ import { ServicesHttpService } from './services/services-http.service';
 import { LoginComponent } from './routes/login/login.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { HomeEstudianteComponent } from './routes/home/homeEstudiante/homeEstudiante.component';
+import { HomeComponent } from './routes/home/home.component';
+import { HomeProfesorComponent } from './routes/home/homeProfesor/homeProfesor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    HomeEstudianteComponent,
+    HomeComponent,
+    HomeProfesorComponent
+    
   ],
   imports: [
     BrowserModule,

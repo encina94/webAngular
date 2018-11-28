@@ -1,5 +1,6 @@
-
-    <main role="main">
+<app-header (funcionUser)="onVotedFuncion($event)"  (tipoUser)="onVotedTipo($event)"   (unidadUser)="onVotedUnidad($event)"  (rolesUser)="onVoted($event)"      ></app-header>
+<div > 
+<main role="main">
         <section>
             <div class="container">
               <div class="row panels-row">
@@ -35,4 +36,7 @@
         </section>
               
     </main>
+</div>
+
+    <app-footer></app-footer>
     

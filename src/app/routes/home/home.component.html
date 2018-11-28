@@ -1,7 +1,7 @@
 
     <app-header (funcionUser)="onVotedFuncion($event)"  (tipoUser)="onVotedTipo($event)"   (unidadUser)="onVotedUnidad($event)"  (rolesUser)="onVoted($event)"      ></app-header>
 
-<div *ngIf="rol == 'Alumno'">
+<div >
 <main role="main">
     <section>
         <div class="container">
@@ -85,7 +85,7 @@
 </section>
 </main>
 </div>
-<div *ngIf="rol == 'Jurisdiccional Genérico'">
+<!-- <div *ngIf="rol == 'Jurisdiccional Genérico'">
     <app-homeJuridiccional></app-homeJuridiccional>
 </div>
 <div *ngIf="rol == 'Personal Genérico'">
@@ -93,5 +93,5 @@
 </div>
 <div *ngIf="rol == 'Institucional Genérico'">
     <app-homeInstitucional></app-homeInstitucional>
-</div>
+</div> -->
 <app-footer></app-footer>
