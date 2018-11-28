@@ -22,3 +22,4 @@ constructor(){
       this.contraseña= "";
       this.tipoUsuario= "";
 }
+}

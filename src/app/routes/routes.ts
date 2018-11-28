@@ -4,6 +4,8 @@ import { HomeEstudianteComponent } from "./home/homeEstudiante/homeEstudiante.co
 import { HomeProfesorComponent } from "./home/homeProfesor/homeProfesor.component";
 import { HomeComponent } from "./home/home.component";
 
+import { MateriasComponent } from "./materias/materias.component";
+
 
 
 
@@ -15,6 +17,7 @@ export const routes = [
     { path: 'home',component:HomeComponent},
     { path: 'homeEstudiantes', component:HomeEstudianteComponent},
     { path: 'homeProfesor', component:HomeProfesorComponent},
+    {path: 'materias', component: MateriasComponent}
     
 
     ];

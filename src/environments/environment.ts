@@ -7,7 +7,7 @@ export const environment = {
   envName:"Local",
   // version: require('../../package.json').version,
 //LOCAL
-  restApiUrl: 'http://localhost:9095/',
+  restApiUrl: 'http://localhost:9095'
 };
 
 

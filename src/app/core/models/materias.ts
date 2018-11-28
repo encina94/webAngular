@@ -1,5 +1,5 @@
 import { Temas } from "./temas";
-export class Alumno {
+export class Materias {
     public  id: number;
     public  descripcion: string;
     public  temas :Array<Temas>;

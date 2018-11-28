@@ -22,6 +22,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeEstudianteComponent } from './routes/home/homeEstudiante/homeEstudiante.component';
 import { HomeComponent } from './routes/home/home.component';
 import { HomeProfesorComponent } from './routes/home/homeProfesor/homeProfesor.component';
+import { MateriasComponent } from './routes/materias/materias.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HomeProfesorComponent } from './routes/home/homeProfesor/homeProfesor.c
     HeaderComponent,
     HomeEstudianteComponent,
     HomeComponent,
-    HomeProfesorComponent
+    HomeProfesorComponent,
+    MateriasComponent
     
   ],
   imports: [

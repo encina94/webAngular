@@ -19,6 +19,7 @@ export class ServicesHttpService {
 
   
   traerMaterias() {
+   
     return this.http
       .get(this.rest+"/api/materias"); 
    }
@@ -126,6 +127,3 @@ export class ServicesHttpService {
 
 
 
-
-
-}

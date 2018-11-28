@@ -3,15 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { NotificationOptions } from '../../core/notifications/notification';
+import { ServicesHttpService } from 'src/app/services/services-http.service';
+import { MateriaViewModel } from 'src/app/core/models/materiasViewModel';
 
 @Component({
-  selector: 'app-profesores',
-  templateUrl: './profesores.component.html',
-  styleUrls: ['./profesores.component.scss'],
+  selector: 'app-materias',
+  templateUrl: './materias.component.html',
+  styleUrls: ['./materias.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 
-export class ProfesoresComponent {
+export class MateriasComponent {
   public displayNombre: string;
 
   //Table
@@ -22,31 +24,56 @@ export class ProfesoresComponent {
   private _notificador:NotificationOptions;
 
   columns=[
-    {prop:'uoOrg.orgTipo',name:'Tipo'},
-    {prop:'uoNombre',name:'Nombre'},
-    {prop:'uoNivel', name: 'Nivel'},
-    {prop:'uoModalidad', name:'Modalidad'},
-    {prop:'uoLocalidad',name:'Localidad'},
+    {prop:'descripcionMateria',name:'Materia'},
+    {prop:'descripcionTema',name:'Tema'},
   ];
 
   restItems: any = [];
+  temasMaterias: any = [];
+  item:MateriaViewModel;
 
-  constructor(private router: Router,private http: HttpClient, private service:  OrganizacionService) {
-    this._notificador = new NotificationOptions();
-    this.displayNombre= sessionStorage.getItem("rolActivo") +"( "+sessionStorage.getItem("unidadActivo")+" )";
+  constructor(private router: Router,private http: HttpClient, private service:  ServicesHttpService) {
+    // this._notificador = new NotificationOptions();
+    this.displayNombre= "Sebastian";
+    
+    // sessionStorage.getItem("rolActivo") +"( "+sessionStorage.getItem("unidadActivo")+" )";
   }
   
   ngOnInit() {
-    this.getAllOrganizaciones();
+    this.item = new MateriaViewModel();
+    this.getAllMaterias();
  }
 
-  getAllOrganizaciones()
+  getAllMaterias()
   {
-    this.service.getOrganizacion()
+    this.service.traerMaterias()
     .subscribe(
       restItems => {
+
         this.restItems = restItems;
-        this.temp = restItems;
+        this.restItems.forEach(element => {
+         
+          if(element.temas.length >0){
+            for(var i=0; i < element.temas.length; i++){
+              this.item = new MateriaViewModel();
+              this.item.descripcionMateria = element.descripcion;
+              this.item.descripcionTema = element.temas[i].descripcion;
+              this.item.idMateria = element.idMateria;
+              this.item.idTema = element.temas[i].idTema;
+              this.temasMaterias.push(this.item);
+            }
+          
+            
+          }else{
+            this.item = new MateriaViewModel();
+            this.item.descripcionMateria = element.descripcion;
+            this.item.descripcionTema = "";
+            this.item.idMateria = element.idMateria;
+            this.item.idTema = 0;
+            this.temasMaterias.push(this.item);
+          }
+       }); 
+        this.temp = this.temasMaterias;
       }
     )
   }
@@ -112,11 +139,9 @@ updateFilter(event) {
   //filtro por cualquiera de las 4 columnas
   const temp1 = this.temp.filter(function (d) {
     
-    return ((d.uoOrg.orgTipo.tipo) ? d.uoOrg.orgTipo.tipo.toLowerCase().indexOf(filtro) !== -1 : false)
-          ||((d.uoNombre) ? d.uoNombre.toLowerCase().indexOf(filtro) !== -1 : false)
-          || ((d.uoNivel) ? d.uoNivel.toLowerCase().indexOf(filtro) !== -1 : false)
-          || ((d.uoModalidad) ? d.uoModalidad.toLowerCase().indexOf(filtro) !== -1: false)
-          || ((d.uoLocalidad) ? d.uoLocalidad.toLowerCase().indexOf(filtro) !== -1 : false)
+    return ((d.descripcionMateria) ? d.descripcionMateria.toLowerCase().indexOf(filtro) !== -1 : false)
+          ||((d.descripcionTema) ? d.descripcionTema.toLowerCase().indexOf(filtro) !== -1 : false)
+     
         
   });
 

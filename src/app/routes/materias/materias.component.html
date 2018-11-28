@@ -14,7 +14,7 @@
       <div class="container">
               <ol class="breadcrumb">
                       <li> <a routerLink="/home" class="text-cielo">{{displayNombre}}</a></li>
-                      <li class="active"><a href="#" style="color:black">Inscripciones</a></li>
+                      <li class="active"><a href="#" style="color:black">Materias</a></li>
                </ol>
       </div>
 
@@ -24,12 +24,12 @@
         <div class="container">
           <div class="row ">
             <div class="col-md-12">
-                <p><font size="5"><span class="text-cielo"><strong>INSCRIPCIONES</strong></span></font>
+                <p><font size="5"><span class="text-cielo"><strong>MATERIAS</strong></span></font>
                 </p>
             </div>
           </div>
           <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#menu1">Inscribirse</a></li>
+            <li class="active"><a data-toggle="tab" href="#menu1">Materias</a></li>
           </ul>
           <br>
           <div class="tab-content">
@@ -52,7 +52,7 @@
                 <ngx-datatable #table  class="bootstrap no-detail-row" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="'auto'" [limit]="10" [rows]="temp" [count]="true" [offset]="tableOffSet" (select)='onSelect($event)' [selectionType]="'single'">
                   <ngx-datatable-column *ngFor="let item of columns" prop={{item.prop}} name={{item.name}}>
                   </ngx-datatable-column>
-                  <ngx-datatable-column name="Acciones" sortable="false" prop="uoId">
+                  <ngx-datatable-column name="Acciones" sortable="false" prop="idMateria">
                     <ng-template let-row="rowIndex" let-value="value" ngx-datatable-cell-template>
                       <button class="btn btn-default btn-xs btn-space" (click)="open(value)">
                         <i class="fa fa-eye"></i>
