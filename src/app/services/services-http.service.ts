@@ -4,17 +4,55 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RequestOptions, RequestOptionsArgs, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Puntuacion } from '../core/models/puntuacion';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicesHttpService {
-  // restItemsUrlAuth = environment.restApiUrlAuth;
+  rest = environment.restApiUrl;
   selectedItemTable: any;
   personaId: any;
 
   constructor(private http: HttpClient) { }
+
+  
+  traerMaterias() {
+    return this.http
+      .get(this.rest+"/api/materias"); 
+   }
+
+   traerProfesores(){
+    return this.http
+    .get(this.rest+"/api/profesores"); 
+ }
+
+ traerProfesoresTarifas(){
+  return this.http
+  .get(this.rest+"/api/tarifas"); 
+ }
+
+
+ puntuar(puntuacion:Puntuacion){
+    return this.http.post<Puntuacion>(this.rest +"/api/puntuaciones", puntuacion)
+      .subscribe();
+ }
+
+//  altaUsuario(usuario:Usuario){
+//   return this.http.post<Puntuacion>(this.rest +"/api/usuarios", usuario)
+//   .subscribe();
+//  }
+
+//  traerUsuario(usuario:string,pass:string){
+//   return this.http
+//   .get(this.rest+"/api/usuarios",); 
+//  }
+
+
+
+   }
+
 
 
   // traerPersonaPorId(id) {

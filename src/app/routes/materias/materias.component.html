@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+
+  </head>
+
+  <body>
+   <app-header></app-header>
+   <div class="row" style="background-color:#F9F9F9">
+      <div class="container">
+              <ol class="breadcrumb">
+                      <li> <a routerLink="/home" class="text-cielo">{{displayNombre}}</a></li>
+                      <li class="active"><a href="#" style="color:black">Inscripciones</a></li>
+               </ol>
+      </div>
+
+</div>
+<main role="main">
+    <section >
+        <div class="container">
+          <div class="row ">
+            <div class="col-md-12">
+                <p><font size="5"><span class="text-cielo"><strong>INSCRIPCIONES</strong></span></font>
+                </p>
+            </div>
+          </div>
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#menu1">Inscribirse</a></li>
+          </ul>
+          <br>
+          <div class="tab-content">
+
+            <div id="menu1" class="tab-pane fade in active" style="margin-top:40px">
+
+                <div class="row">
+                  <div class="col-lg-6">
+                  <div class="input-group ">
+                      <input #organizacion class="form-control" placeholder='Buscar...' (input)="updateFilter(organizacion.value)" type="text">
+                      <span class="input-group-btn">
+                        <button class="btn btn-primary"  type="button"><i class="fa fa-search"></i></button>
+                      </span>
+                  </div>
+                </div>
+                  <!-- <div class="col-lg-6">
+                        <button (click)='newOrganizacion()' class="btn btn-success pull-right" style="margin-right: 5px">AGREGAR</button>
+                      </div> -->
+                    </div>
+                <ngx-datatable #table  class="bootstrap no-detail-row" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="'auto'" [limit]="10" [rows]="temp" [count]="true" [offset]="tableOffSet" (select)='onSelect($event)' [selectionType]="'single'">
+                  <ngx-datatable-column *ngFor="let item of columns" prop={{item.prop}} name={{item.name}}>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Acciones" sortable="false" prop="uoId">
+                    <ng-template let-row="rowIndex" let-value="value" ngx-datatable-cell-template>
+                      <button class="btn btn-default btn-xs btn-space" (click)="open(value)">
+                        <i class="fa fa-eye"></i>
+                      </button>
+                      <button class="btn btn-primary btn-xs btn-space" (click)="edit(value)">
+                        <i class="fa fa-pencil"></i>
+                      </button>
+                      <button class="btn btn-danger btn-xs btn-space" (click)="delete(value)">
+                        <i class="fa fa-trash-o"></i>
+                      </button>
+                  </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+            <div >
+           <!-- //     <button class="btn btn-success btn-md col-lg-3 col-lg-offset-9" (click)='newOrganizacion()' style="text-align:center">NUEVA ORGANZACION</button> -->
+            </div>
+            </div>
+
+          </div>
+        </div>
+
+  </section>
+</main>
+
+   <app-footer></app-footer>
+
+
+</body>
+
+</html>
