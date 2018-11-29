@@ -68,7 +68,7 @@ export class MateriasComponent {
             this.item = new MateriaViewModel();
             this.item.descripcionMateria = element.descripcion;
             this.item.descripcionTema = "";
-            this.item.idMateria = element.idMateria;
+            this.item.idMateria = element.id;
             this.item.idTema = 0;
             this.temasMaterias.push(this.item);
           }
