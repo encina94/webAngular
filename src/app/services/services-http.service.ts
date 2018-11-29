@@ -51,6 +51,11 @@ export class ServicesHttpService {
       .subscribe();
  }
 
+ traerUsuarios(){
+  return this.http
+  .get(this.rest+"/api/usuarios"); 
+ }
+
 //  altaUsuario(usuario:Usuario){
 //   return this.http.post<Puntuacion>(this.rest +"/api/usuarios", usuario)
 //   .subscribe();

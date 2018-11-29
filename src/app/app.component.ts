@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angularWeb';
+  title = 'Tu profesor Online';
   constructor(public router:Router){}
   selectEnc(){
     

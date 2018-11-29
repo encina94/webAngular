@@ -14,7 +14,7 @@ import { ProfesoresComponent } from "./profesores/profesores.component";
 export const routes = [
    
     { path: 'login', component: LoginComponent},
-    { path: '', component:HomeComponent},
+    { path: '', component: LoginComponent},
     { path: 'home',component:HomeComponent},
     { path: 'homeEstudiantes', component:HomeEstudianteComponent},
     { path: 'homeProfesor', component:HomeProfesorComponent},

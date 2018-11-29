@@ -22,13 +22,15 @@ export class LoginComponent implements OnInit {
   restItems: any;
   private notificador:NotificationOptions;
   datosLogin: FormGroup;
+  flag:boolean;
   constructor(private http: HttpClient, 
     // private service:  LoginService
-    private serviceAuth:  ServicesHttpService, private router:Router, private fb: FormBuilder) {
+    private service:  ServicesHttpService, private router:Router, private fb: FormBuilder) {
     this.notificador=new NotificationOptions();
   }
 
   ngOnInit(){
+    this.flag = true;
     this.datosLogin = this.fb.group({
       espUsuario: [this.identidad, Validators.required],
       espContra: [this.clave, Validators.required
@@ -42,27 +44,35 @@ export class LoginComponent implements OnInit {
 
     }else{
 
-      // this.service.restLoginByUser(this.identidad,this.clave)
-      // .subscribe(
-      // restItems => {
-      // this.restItems = restItems;
-      // sessionStorage.setItem('token',this.restItems.token);
-      // sessionStorage.setItem('user',this.restItems.user);
-      // this.serviceAuth.traerPerfil(this.restItems.user).subscribe(x=>{
-      //   this.listPerf = x;
-      //   this.router.navigate(['/home']);
+      this.service.traerUsuarios()
+      .subscribe(
+      restItems => {
+      this.restItems = restItems;
+      this.restItems.forEach(element => {
+        if(element.usuario == this.identidad && element.contraseña == this.clave){
+          //  sessionStorage.setItem('token',this.restItems.token);
+           sessionStorage.setItem('nombre',this.restItems.nombre);
+           sessionStorage.setItem('tipoUsuario',this.restItems.tipoUsuario);
+           sessionStorage.setItem('apellido',this.restItems.apellido);
+           this.router.navigate(['/home']);
+           this.flag = false;
+
+
+        }
         
-      // }, error=>{
-      //   this.notificador.toast.Error("No posee roles asignados");
+      });
+      debugger;
+      if(this.flag){
+        this.notificador.toast.Error("Usuario o contraseña incorrectos");
+      }
         
-      // })
+      }, error=>{
+        this.notificador.toast.Error("Ha ocurrido un error");
+        
+      })
       
 
-      // }
-      // , error => {
-      //   this.notificador.toast.Error("Error al iniciar sesión, usuario o contraseña incorrecta.");
-      // }
-      // )
+     
 
     }
 
