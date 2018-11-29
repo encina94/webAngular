@@ -51,9 +51,9 @@ export class LoginComponent implements OnInit {
       this.restItems.forEach(element => {
         if(element.usuario == this.identidad && element.contraseña == this.clave){
           //  sessionStorage.setItem('token',this.restItems.token);
-           sessionStorage.setItem('nombre',this.restItems.nombre);
-           sessionStorage.setItem('tipoUsuario',this.restItems.tipoUsuario);
-           sessionStorage.setItem('apellido',this.restItems.apellido);
+           sessionStorage.setItem('nombre',element.nombre);
+           sessionStorage.setItem('tipoUsuario',element.tipoUsuario);
+           sessionStorage.setItem('apellido',element.apellido);
            this.router.navigate(['/home']);
            this.flag = false;
 

@@ -18,6 +18,11 @@ export class HomeComponent {
 
   
   constructor(private http: HttpClient, private service:  ServicesHttpService) {}
+
+  ngOnInit() {
+    this.rol= sessionStorage.getItem("tipoUsuario");
+   
+ }
  
   onVoted(agreed: string) {
     this.rol = agreed;
