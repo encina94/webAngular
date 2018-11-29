@@ -1,0 +1,153 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registro</title>
+
+  </head>
+<body>
+  <header>
+    <nav class="navbar navbar-top navbar-default" role="navigation">
+      <div class="container">
+        <div>
+          <div class="navbar-header">
+            <br>
+            <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button> -->
+              <p><font size="6"><strong><span class="text-cielo">PROFESOR </span>ONLINE</strong></font> INSCRIPCIONES A CLASES PARTICULARES</p>
+          </div>
+
+          <div class="collapse navbar-collapse" id="main-navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#">Login</a></li>
+
+              <li><a href="#">Ayuda</a></li>
+              <li><a href="#"><i class="fa fa-search"></i></a></li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+<main role="main">
+  <div class="container">
+    <div class="tab-content">
+
+      <!-- FORMULARIO ALTA -->
+      <div *ngIf="!verTabla" class="col-lg-12 panel panel-default" [formGroup]="formUsuario">
+        <div class="col-lg-6" style="margin-top: 10px">
+          <div class="form-group col-lg-12 has-feedback" [ngClass]="getValidacion('tipoUsuario')? 'has-error':''">
+            <label class="control-label" for="exampleInputName2" style="font-weight:bold">Tipo de usuario:</label>
+            <select class="form-control" [(ngModel)]="usuario.tipoUsuario" formControlName="tipoUsuario" name="somenthing21"
+              style="width:100%">
+              <option disabled [ngValue]=null>Seleccionar</option>
+              <option [ngValue]="1">Estudiante</option>
+              <option [ngValue]="2">Profesor</option>
+
+            </select>
+            <span *ngIf="getValidacion('tipoUsuario')" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <div class="text-danger" *ngIf="getValidacion('tipoUsuario')">* Campo requerido</div>
+          </div>
+
+          <div class="form-group col-lg-12 has-feedback" [ngClass]="getValidacion('usuario')? 'has-error':''">
+            <label class="control-label" for="exampleInput4" style="font-weight:bold;">Usuario:</label>
+            <input formControlName="usuario" [(ngModel)]="usuario.usuario" required type="text" class="form-control"
+              name="something4" style="width:100%" id="exampleInputEmail2" placeholder="Ingrese nombre de Usuario">
+            <span style="margin-right: 12px" *ngIf="getValidacion('usuario')" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <div class="text-danger" *ngIf="formUsuario.controls.usuario.errors &&( formUsuario.controls.usuario.dirty || formUsuario.controls.usuario.touched) ">
+              * Campo requerido
+            </div>
+          </div>
+
+          <div class="form-group col-lg-12 has-feedback" [ngClass]="getValidacion('pass')? 'has-error':''">
+            <label class="control-label" for="exampleInput4" style="font-weight:bold;">Contraseña:</label>
+            <input formControlName="pass" [(ngModel)]="clave" required type="password" class="form-control"
+              name="something4" style="width:100%" id="exampleInputEmail2" placeholder="Ingrese Contraseña">
+            <span style="margin-right: 12px" *ngIf="getValidacion('pass')" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <div class="text-danger" *ngIf="formUsuario.controls.pass.errors &&( formUsuario.controls.pass.dirty || formUsuario.controls.pass.touched) ">
+              * Campo Requerido
+            </div>
+          </div>
+
+          <div class="form-group col-lg-12 has-feedback" [ngClass]="getValidacion('direccion')? 'has-error':''">
+            <label class="control-label" for="exampleInput4" style="font-weight:bold;">Dirección:</label>
+            <input formControlName="direccion" [(ngModel)]="usuario.direccion" required type="text" class="form-control"
+              name="something4" style="width:100%" id="exampleInputEmail2" placeholder="Ingrese Dirección">
+            <span style="margin-right: 12px" *ngIf="getValidacion('direccion')" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <div class="text-danger" *ngIf="formUsuario.controls.direccion.errors &&( formUsuario.controls.direccion.dirty || formUsuario.controls.direccion.touched) ">
+              * Campo Requerido
+            </div>
+          </div>
+
+        </div>
+        <div class="row col-lg-6" style="margin-top: 10px">
+
+
+          <div class="form-group col-lg-12">
+            <label class="control-label" for="exampleInput1" style="font-weight:bold">Contacto Teléfono</label>
+            <input formControlName="telefono" [(ngModel)]="usuario.telefono" type="number" class="form-control" style="width:100%"
+              placeholder="Ingrese el Teléfono" name="something2">
+          </div>
+
+
+          <div class="form-group col-lg-12 has-feedback" [ngClass]="getValidacion('nombre')? 'has-error':''">
+            <label class="control-label" for="exampleInput4" style="font-weight:bold;">Nombre:</label>
+            <input formControlName="nombre" [(ngModel)]="usuario.nombre" required type="text" class="form-control" name="something4"
+              style="width:100%" id="exampleInputEmail2" placeholder="Ingrese Nombre">
+            <span style="margin-right: 12px" *ngIf="getValidacion('nombre')" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <div class="text-danger" *ngIf="formUsuario.controls.nombre.errors &&( formUsuario.controls.nombre.dirty || formUsuario.controls.nombre.touched) ">
+              * Campo Requerido
+            </div>
+          </div>
+
+          <div class="form-group col-lg-12 has-feedback" [ngClass]="getValidacion('apellido')? 'has-error':''">
+            <label class="control-label" for="exampleInput4" style="font-weight:bold;">Apellido:</label>
+            <input formControlName="apellido" [(ngModel)]="usuario.apellido" required type="text" class="form-control"
+              name="something4" style="width:100%" id="exampleInputEmail2" placeholder="Ingrese Apellido">
+            <span style="margin-right: 12px" *ngIf="getValidacion('apellido')" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <div class="text-danger" *ngIf="formUsuario.controls.apellido.errors &&( formUsuario.controls.apellido.dirty || formUsuario.controls.apellido.touched) ">
+              * Campo Requerido
+            </div>
+          </div>
+
+          <div class="form-group col-lg-12 has-feedback" [ngClass]="getValidacion('email')? 'has-error':''">
+            <label class="control-label" for="exampleInput4" style="font-weight:bold;">Email:</label>
+            <input formControlName="email" [(ngModel)]="usuario.email" required type="email" class="form-control" name="something4"
+              style="width:100%" id="exampleInputEmail2" placeholder="Ingrese Email">
+            <span style="margin-right: 12px" *ngIf="getValidacion('email')" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <div class="text-danger" *ngIf="formUsuario.controls.email.errors &&( formUsuario.controls.email.dirty || formUsuario.controls.email.touched) ">
+              * Email Requerido
+            </div>
+          </div>
+        </div>
+
+      
+
+      </div>
+      <div class="row col-lg-12 col-lg-offset-4">
+        <button  class="btn btn-success btn-md col-lg-4" (click)="guardar()" style="text-align:center">REGISTRARSE</button>
+  
+      </div>
+
+      
+    </div>
+
+    
+
+    
+  
+  
+  
+  </div>
+
+</main>
+<!-- Footer -->
+ <app-footer></app-footer>
+</body>
+</html>

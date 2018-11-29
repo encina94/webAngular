@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationOptions } from '../../core/notifications/notification';
 import { ServicesHttpService } from 'src/app/services/services-http.service';
 import { MateriaViewModel } from 'src/app/core/models/materiasViewModel';
+import { ProfesorViewModel } from 'src/app/core/models/profesoresViewModel';
 
 @Component({
   selector: 'app-profesores',
@@ -30,9 +31,8 @@ export class ProfesoresComponent {
     {prop:'email',name:'Email'},
     {prop:'direccion',name:'Direccion'},
     {prop:'telefono',name:'Telefono'},
-    {prop:'tarifas[0].tarifa',name:'Tarifa'},
-    {prop:'puntuaciones[0].puntuacion',name:'Puntuacion'},
-    {prop:'referencias[0].descripcion',name:'Referencia'},
+    {prop:'tarifa',name:'Tarifa'},
+    {prop:'referencias',name:'Referencia'},
   ];
 
 //   [{"id":2,"nombre":"Sebastian","apellido":"Encina","email":"encina.sebastian94@gmail.com",
@@ -58,6 +58,8 @@ export class ProfesoresComponent {
   restItems: any = [];
   profesores: any = [];
   materiaTema: any;
+  profesoresModel: Array<ProfesorViewModel> = [];
+  item: ProfesorViewModel;
 
   constructor(private router: Router,private http: HttpClient, private service:  ServicesHttpService, private route: ActivatedRoute) {
     this._notificador = new NotificationOptions();
@@ -68,21 +70,33 @@ export class ProfesoresComponent {
   }
   
   ngOnInit() {
-   
+   this.profesoresModel = new Array<ProfesorViewModel>();
+
     this.getAllProfesores();
  }
 
   getAllProfesores()
   {
       if(this.materiaTema.idTemas!=0){
-          debugger;
+   
         this.service.traerProfesoresByTemaMateria(this.materiaTema.idTemas,this.materiaTema.idMaterias)
         .subscribe(
           restItems => {
  
             this.restItems = restItems;
-           
-            this.temp = this.restItems;
+    
+            this.restItems.forEach(element => {
+                  this.item = new ProfesorViewModel();
+                  this.item.nombre = element.nombre;
+                  this.item.apellido = element.apellido;
+                  this.item.email = element.email;
+                  this.item.direccion = element.direccion;
+                  this.item.telefono = element.telefono;
+                  this.item.tarifa = element.tarifas[0].tarifa;
+                  this.item.referencias = element.referencias[0].descripcion;
+                  this.profesoresModel.push(this.item);
+            });
+            this.temp = this.profesoresModel;
           },
           error=>{
           this._notificador.toast.Error("No hay profesores asignados a este tema");
@@ -95,8 +109,19 @@ export class ProfesoresComponent {
           restItems => {
     
             this.restItems = restItems;
+            this.restItems.forEach(element => {
+              this.item = new ProfesorViewModel();
+              this.item.nombre = element.nombre;
+              this.item.apellido = element.apellido;
+              this.item.email = element.email;
+              this.item.direccion = element.direccion;
+              this.item.telefono = element.telefono;
+              this.item.tarifa = element.tarifas[0].tarifa;
+              this.item.referencias = element.referencias[0].descripcion;
+              this.profesoresModel.push(this.item);
+        });
            
-            this.temp = this.restItems;
+        this.temp = this.profesoresModel;
           },
           error=>{
         
@@ -122,7 +147,7 @@ updateFilter(event) {
 
   //si lo escrito es de tipo string lo paso a minuscula
   var filtro = (typeof event === "string") ? event.toLowerCase() : event;
-  this.temp = this.restItems;
+  this.temp = this.profesoresModel;
 
   //filtro por cualquiera de las 4 columnas
   const temp1 = this.temp.filter(function (d) {
@@ -132,9 +157,9 @@ updateFilter(event) {
           ||((d.email) ? d.email.toLowerCase().indexOf(filtro) !== -1 : false)
           ||((d.direccion) ? d.direccion.toLowerCase().indexOf(filtro) !== -1 : false)
           ||((d.telefono) ? d.telefono.toLowerCase().indexOf(filtro) !== -1 : false)
-          ||((d.tarifas[0].tarifa) ? d.tarifas[0].tarifa.toLowerCase().indexOf(filtro) !== -1 : false)
-          ||((d.puntuaciones[0].puntuacion) ? d.puntuaciones[0].puntuacion.toLowerCase().indexOf(filtro) !== -1 : false)
-          ||((d.descripcionTema) ? d.referencias[0].descripcion.toLowerCase().indexOf(filtro) !== -1 : false)
+          ||((d.tarifa) ? d.tarifa.toLowerCase().indexOf(filtro) !== -1 : false)
+          ||((d.puntuacion) ? d.puntuacion.toLowerCase().indexOf(filtro) !== -1 : false)
+          ||((d.descripcion) ? d.descripcion.toLowerCase().indexOf(filtro) !== -1 : false)
      
         
   });

@@ -24,6 +24,7 @@ import { HomeComponent } from './routes/home/home.component';
 import { HomeProfesorComponent } from './routes/home/homeProfesor/homeProfesor.component';
 import { MateriasComponent } from './routes/materias/materias.component';
 import { ProfesoresComponent } from './routes/profesores/profesores.component';
+import { UsuarioComponent } from './routes/usuario/usuario.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ProfesoresComponent } from './routes/profesores/profesores.component';
     HomeComponent,
     HomeProfesorComponent,
     MateriasComponent,
-    ProfesoresComponent
+    ProfesoresComponent,
+    UsuarioComponent
     
   ],
   imports: [

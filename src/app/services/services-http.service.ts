@@ -56,6 +56,12 @@ export class ServicesHttpService {
   .get(this.rest+"/api/usuarios"); 
  }
 
+ crearusuario(usuario) {
+   debugger;
+    return this.http.post<any[]>(this.rest + "/api/usuarios", usuario)
+  
+  }
+
 //  altaUsuario(usuario:Usuario){
 //   return this.http.post<Puntuacion>(this.rest +"/api/usuarios", usuario)
 //   .subscribe();
