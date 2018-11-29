@@ -1,142 +1,163 @@
-// import { Component, OnInit,ViewEncapsulation  } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Router } from '@angular/router';
 
-// import { NotificationOptions } from '../../core/notifications/notification';
+import { Component, OnInit,ViewEncapsulation  } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
 
-// @Component({
-//   selector: 'app-profesores',
-//   templateUrl: './profesores.component.html',
-//   styleUrls: ['./profesores.component.scss'],
-//   encapsulation: ViewEncapsulation.None
-// })
+import { NotificationOptions } from '../../core/notifications/notification';
+import { ServicesHttpService } from 'src/app/services/services-http.service';
+import { MateriaViewModel } from 'src/app/core/models/materiasViewModel';
 
-// export class ProfesoresComponent {
-//   public displayNombre: string;
+@Component({
+  selector: 'app-profesores',
+  templateUrl: './profesores.component.html',
+  styleUrls: ['./profesores.component.scss'],
+  encapsulation: ViewEncapsulation.None
+})
 
-//   //Table
-//   timeout: any;
-//   tableOffSet= 0;
-//   selected = [];
-//   temp: any = [];
-//   private _notificador:NotificationOptions;
+export class ProfesoresComponent {
+  public displayNombre: string;
 
-//   columns=[
-//     {prop:'uoOrg.orgTipo',name:'Tipo'},
-//     {prop:'uoNombre',name:'Nombre'},
-//     {prop:'uoNivel', name: 'Nivel'},
-//     {prop:'uoModalidad', name:'Modalidad'},
-//     {prop:'uoLocalidad',name:'Localidad'},
-//   ];
+  //Table
+  timeout: any;
+  tableOffSet= 0;
+  selected = [];
+  temp: any = [];
+  private _notificador:NotificationOptions;
 
-//   restItems: any = [];
+  columns=[
+    {prop:'nombre',name:'Nombre'},
+    {prop:'apellido',name:'Apellido'},
+    {prop:'email',name:'Email'},
+    {prop:'direccion',name:'Direccion'},
+    {prop:'telefono',name:'Telefono'},
+    {prop:'tarifas[0].tarifa',name:'Tarifa'},
+    {prop:'puntuaciones[0].puntuacion',name:'Puntuacion'},
+    {prop:'referencias[0].descripcion',name:'Referencia'},
+  ];
 
-//   constructor(private router: Router,private http: HttpClient, private service:  OrganizacionService) {
-//     this._notificador = new NotificationOptions();
-//     this.displayNombre= sessionStorage.getItem("rolActivo") +"( "+sessionStorage.getItem("unidadActivo")+" )";
-//   }
-  
-//   ngOnInit() {
-//     this.getAllOrganizaciones();
-//  }
+//   [{"id":2,"nombre":"Sebastian","apellido":"Encina","email":"encina.sebastian94@gmail.com",
+//   "direccion":"Calle falsa 123","telefono":"43222523","usuario":"sencina","contraseña":"sencina",
+//   "tipoUsuario":"Profesor","social":"https://www.linkedin.com/in/sebastian-encina-157835135/","tarifas"
+//   :[{"id":1,"tarifa":250.0,"vigenciadesde":"2018-01-01T00:00:00.000+0000","vigenciahasta":"2019-01-01T00:00:00.000+0000"}],
+//   "puntuaciones":[{"id":1,"puntuacion":5,"fecha":"2018-11-02T13:25:00.000+0000"}],
+//   "repositorios":[{"id":1,"materia":{"id":1,"descripcion":
+//   "Matematica I","temas":[{"id":6,"descripcion":"Limite y continuidad"},{"id":7,"descripcion":"Derivadas"}]},
+//   "problema":"Como resolver la siguiente ecuacion diferencial de 1er orden por variables separables?",
+//   "solucion":"Ni idea, preguntale a otro."}],
+//   "referencias":[{"id":1,"descripcion":"Profesor en Universidad Nacional Arturo Jauretche"},
+//   {"id":2,"descripcion":"Programador Senior en Google SRL"}],
+//   "oferta":[{"ofertaid":2,"materia":{"id":2,"descripcion":"Matematica II","temas":[{"id":2,"descripcion":"Integrales dobles"},
+//   {"id":1,"descripcion":"Matrices y Vectores"},{"id":3,"descripcion":"Integrales triples"}]},"tema":{"id":2,"descripcion":
+//   "Integrales dobles"}},{"ofertaid":1,"materia":{"id":1,"descripcion":"Matematica I","temas":[{"id":6,"descripcion":
+//   "Limite y continuidad"},{"id":7,"descripcion":"Derivadas"}]},"tema":{"id":1,"descripcion":"Matrices y Vectores"}},
+//   {"ofertaid":3,"materia":{"id":3,"descripcion":"Matematicas III","temas":[{"id":4,"descripcion":
+//   "Ecuaciones diferenciales de 1er orden"},{"id":5,"descripcion":"Ecuaciones diferenciales de 2do orden"}]},
+//   "tema":{"id":3,"descripcion":"Integrales triples"}},{"ofertaid":4,"materia":
+//   {"id":4,"descripcion":"Fisica I","temas":[]},"tema":{"id":4,"descripcion":"Ecuaciones diferenciales de 1er orden"}}]}]
 
-//   getAllOrganizaciones()
-//   {
-//     this.service.getOrganizacion()
-//     .subscribe(
-//       restItems => {
-//         this.restItems = restItems;
-//         this.temp = restItems;
-//       }
-//     )
-//   }
+  restItems: any = [];
+  profesores: any = [];
+  materiaTema: any;
 
-//   newOrganizacion()
-//   {
+  constructor(private router: Router,private http: HttpClient, private service:  ServicesHttpService, private route: ActivatedRoute) {
+    this._notificador = new NotificationOptions();
+    this.route.params.subscribe( params => this.materiaTema= params); 
+    this.displayNombre= "Sebastian";
     
-//     this.router.navigate(["/organizaciones/alta"]);
-//   }
-
-//   open(value){
-//     var object ={id:value,nombre:"ver"}
-//     this.router.navigate(["/organizaciones/ver",value]);
-//   }
-
-//   edit(value){
-//     this.router.navigate(["/organizaciones/editar",value]);
-//   }
-
-
-
-// //**********************
-// // delete(value) {
-// //   this._notificador.confirm.Message("Eliminar Organización","¿Desea continuar?")
-// //   .then(
-// //     (result)=>{ 
-// //       var r=(result as any).value;
-// //       if(r){
-// //         {
-// //          this.service.deleteOrganizacion(value).subscribe(res => {
-// //           this._notificador.toast.Success("Eliminado Correctamente")
-// //           this.getAllOrganizaciones();
-// //         },
-// //             err => {
-// //               var error  = err.error;
-// //               if(error.includes("desasocie")){
-// //                 this._notificador.alert.BasicMessage(err.error)
-// //                 // this._notificador.toast.Error("No se pudo eliminar")
-// //               }
-// //               else{
-// //                 this._notificador.toast.Error("No se pudo eliminar")
-// //               }
-// //               console.log(err)}
-// //              );
-// //         }
-// //       }
-// //       else{
-// //         this.getAllOrganizaciones();
-// //       }
+    // sessionStorage.getItem("rolActivo") +"( "+sessionStorage.getItem("unidadActivo")+" )";
+  }
   
-// //       })
-    
+  ngOnInit() {
+   
+    this.getAllProfesores();
+ }
+
+  getAllProfesores()
+  {
+      if(this.materiaTema.idTemas!=0){
+          debugger;
+        this.service.traerProfesoresByTemaMateria(this.materiaTema.idTemas,this.materiaTema.idMaterias)
+        .subscribe(
+          restItems => {
  
-// // }
-
-
-// updateFilter(event) {
-
-//   //si lo escrito es de tipo string lo paso a minuscula
-//   var filtro = (typeof event === "string") ? event.toLowerCase() : event;
-//   this.temp = this.restItems;
-
-//   //filtro por cualquiera de las 4 columnas
-//   const temp1 = this.temp.filter(function (d) {
+            this.restItems = restItems;
+           
+            this.temp = this.restItems;
+          },
+          error=>{
+          this._notificador.toast.Error("No hay profesores asignados a este tema");
+          }
+        )
+      }else{
+          debugger;
+        this.service.traerProfesoresByMateria(this.materiaTema.idMaterias)
+        .subscribe(
+          restItems => {
     
-//     return ((d.uoOrg.orgTipo.tipo) ? d.uoOrg.orgTipo.tipo.toLowerCase().indexOf(filtro) !== -1 : false)
-//           ||((d.uoNombre) ? d.uoNombre.toLowerCase().indexOf(filtro) !== -1 : false)
-//           || ((d.uoNivel) ? d.uoNivel.toLowerCase().indexOf(filtro) !== -1 : false)
-//           || ((d.uoModalidad) ? d.uoModalidad.toLowerCase().indexOf(filtro) !== -1: false)
-//           || ((d.uoLocalidad) ? d.uoLocalidad.toLowerCase().indexOf(filtro) !== -1 : false)
+            this.restItems = restItems;
+           
+            this.temp = this.restItems;
+          },
+          error=>{
         
-//   });
+            this._notificador.toast.Error("No hay profesores asignados a esta materia");
+    
+            })
+      }
+   
+  
+  }
 
-//   // actualizo las filas
-//   this.temp = temp1;
+ 
 
-//   // si el filtro cambia, vuelvo a la primera pagina
-//   this.tableOffSet = 0;
-// }
+  open(value){
+    var object ={id:value,nombre:"ver"}
+    this.router.navigate(["/profesores/ver",value]);
+  }
+
+  
 
 
-//   onSelect({ selected }) {
-//     this.selected[selected[0]];
-//   }
+updateFilter(event) {
 
-//   onChange(event: any): void {
-//     this.tableOffSet = event.offset;
-//   }
+  //si lo escrito es de tipo string lo paso a minuscula
+  var filtro = (typeof event === "string") ? event.toLowerCase() : event;
+  this.temp = this.restItems;
 
-//   volver(){
-//     this.router.navigate(["/organizaciones"]);
-//   }
-// }
+  //filtro por cualquiera de las 4 columnas
+  const temp1 = this.temp.filter(function (d) {
+    
+    return ((d.nombre) ? d.nombre.toLowerCase().indexOf(filtro) !== -1 : false)
+          ||((d.apellido) ? d.apellido.toLowerCase().indexOf(filtro) !== -1 : false)
+          ||((d.email) ? d.email.toLowerCase().indexOf(filtro) !== -1 : false)
+          ||((d.direccion) ? d.direccion.toLowerCase().indexOf(filtro) !== -1 : false)
+          ||((d.telefono) ? d.telefono.toLowerCase().indexOf(filtro) !== -1 : false)
+          ||((d.tarifas[0].tarifa) ? d.tarifas[0].tarifa.toLowerCase().indexOf(filtro) !== -1 : false)
+          ||((d.puntuaciones[0].puntuacion) ? d.puntuaciones[0].puntuacion.toLowerCase().indexOf(filtro) !== -1 : false)
+          ||((d.descripcionTema) ? d.referencias[0].descripcion.toLowerCase().indexOf(filtro) !== -1 : false)
+     
+        
+  });
+
+
+  // actualizo las filas
+  this.temp = temp1;
+
+  // si el filtro cambia, vuelvo a la primera pagina
+  this.tableOffSet = 0;
+}
+
+
+  onSelect({ selected }) {
+    this.selected[selected[0]];
+  }
+
+  onChange(event: any): void {
+    this.tableOffSet = event.offset;
+  }
+
+  volver(){
+    this.router.navigate(["/organizaciones"]);
+  }
+}
+

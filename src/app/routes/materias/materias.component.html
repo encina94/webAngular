@@ -52,17 +52,12 @@
                 <ngx-datatable #table  class="bootstrap no-detail-row" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="'auto'" [limit]="10" [rows]="temp" [count]="true" [offset]="tableOffSet" (select)='onSelect($event)' [selectionType]="'single'">
                   <ngx-datatable-column *ngFor="let item of columns" prop={{item.prop}} name={{item.name}}>
                   </ngx-datatable-column>
-                  <ngx-datatable-column name="Acciones" sortable="false" prop="idMateria">
-                    <ng-template let-row="rowIndex" let-value="value" ngx-datatable-cell-template>
-                      <button class="btn btn-default btn-xs btn-space" (click)="open(value)">
+                  <ngx-datatable-column name="Acciones" sortable="false" prop="idMateria" >
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                      <button class="btn btn-default btn-xs btn-space" (click)="open(row)">
                         <i class="fa fa-eye"></i>
                       </button>
-                      <button class="btn btn-primary btn-xs btn-space" (click)="edit(value)">
-                        <i class="fa fa-pencil"></i>
-                      </button>
-                      <button class="btn btn-danger btn-xs btn-space" (click)="delete(value)">
-                        <i class="fa fa-trash-o"></i>
-                      </button>
+                      
                   </ng-template>
                   </ngx-datatable-column>
                 </ngx-datatable>

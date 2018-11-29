@@ -5,6 +5,7 @@ import { HomeProfesorComponent } from "./home/homeProfesor/homeProfesor.componen
 import { HomeComponent } from "./home/home.component";
 
 import { MateriasComponent } from "./materias/materias.component";
+import { ProfesoresComponent } from "./profesores/profesores.component";
 
 
 
@@ -17,7 +18,8 @@ export const routes = [
     { path: 'home',component:HomeComponent},
     { path: 'homeEstudiantes', component:HomeEstudianteComponent},
     { path: 'homeProfesor', component:HomeProfesorComponent},
-    {path: 'materias', component: MateriasComponent}
+    {path: 'materias', component: MateriasComponent},
+    {path: 'profesores/materias/:idMaterias/:idTemas',name:'ProfesoresComponent', component: ProfesoresComponent}
     
 
     ];

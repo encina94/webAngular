@@ -58,8 +58,8 @@ export class MateriasComponent {
               this.item = new MateriaViewModel();
               this.item.descripcionMateria = element.descripcion;
               this.item.descripcionTema = element.temas[i].descripcion;
-              this.item.idMateria = element.idMateria;
-              this.item.idTema = element.temas[i].idTema;
+              this.item.idMateria = element.id;
+              this.item.idTema = element.temas[i].id;
               this.temasMaterias.push(this.item);
             }
           
@@ -84,50 +84,11 @@ export class MateriasComponent {
     this.router.navigate(["/organizaciones/alta"]);
   }
 
-  open(value){
-    var object ={id:value,nombre:"ver"}
-    this.router.navigate(["/organizaciones/ver",value]);
+  open(letRow){
+    this.router.navigate(["/profesores/materias/",letRow.idMateria,letRow.idTema]);
   }
 
-  edit(value){
-    this.router.navigate(["/organizaciones/editar",value]);
-  }
-
-
-
-//**********************
-// delete(value) {
-//   this._notificador.confirm.Message("Eliminar Organización","¿Desea continuar?")
-//   .then(
-//     (result)=>{ 
-//       var r=(result as any).value;
-//       if(r){
-//         {
-//          this.service.deleteOrganizacion(value).subscribe(res => {
-//           this._notificador.toast.Success("Eliminado Correctamente")
-//           this.getAllOrganizaciones();
-//         },
-//             err => {
-//               var error  = err.error;
-//               if(error.includes("desasocie")){
-//                 this._notificador.alert.BasicMessage(err.error)
-//                 // this._notificador.toast.Error("No se pudo eliminar")
-//               }
-//               else{
-//                 this._notificador.toast.Error("No se pudo eliminar")
-//               }
-//               console.log(err)}
-//              );
-//         }
-//       }
-//       else{
-//         this.getAllOrganizaciones();
-//       }
   
-//       })
-    
- 
-// }
 
 
 updateFilter(event) {

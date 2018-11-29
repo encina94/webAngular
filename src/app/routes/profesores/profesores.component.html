@@ -14,7 +14,7 @@
       <div class="container">
               <ol class="breadcrumb">
                       <li> <a routerLink="/home" class="text-cielo">{{displayNombre}}</a></li>
-                      <li class="active"><a href="#" style="color:black">Inscripciones</a></li>
+                      <li class="active"><a href="#" style="color:black">Profesores</a></li>
                </ol>
       </div>
 
@@ -24,12 +24,12 @@
         <div class="container">
           <div class="row ">
             <div class="col-md-12">
-                <p><font size="5"><span class="text-cielo"><strong>INSCRIPCIONES</strong></span></font>
+                <p><font size="5"><span class="text-cielo"><strong>PROFESORES</strong></span></font>
                 </p>
             </div>
           </div>
           <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#menu1">Inscribirse</a></li>
+            <li class="active"><a data-toggle="tab" href="#menu1">Profesores</a></li>
           </ul>
           <br>
           <div class="tab-content">
@@ -39,7 +39,7 @@
                 <div class="row">
                   <div class="col-lg-6">
                   <div class="input-group ">
-                      <input #organizacion class="form-control" placeholder='Buscar...' (input)="updateFilter(organizacion.value)" type="text">
+                      <input #organizacion class="form-control" placeholder='Buscar...' (input)="updateFilter(value)" type="text">
                       <span class="input-group-btn">
                         <button class="btn btn-primary"  type="button"><i class="fa fa-search"></i></button>
                       </span>
@@ -54,15 +54,10 @@
                   </ngx-datatable-column>
                   <ngx-datatable-column name="Acciones" sortable="false" prop="uoId">
                     <ng-template let-row="rowIndex" let-value="value" ngx-datatable-cell-template>
-                      <button class="btn btn-default btn-xs btn-space" (click)="open(value)">
+                      <button class="btn btn-default btn-xs btn-space" (click)="open(rowIndex)">
                         <i class="fa fa-eye"></i>
                       </button>
-                      <button class="btn btn-primary btn-xs btn-space" (click)="edit(value)">
-                        <i class="fa fa-pencil"></i>
-                      </button>
-                      <button class="btn btn-danger btn-xs btn-space" (click)="delete(value)">
-                        <i class="fa fa-trash-o"></i>
-                      </button>
+                   
                   </ng-template>
                   </ngx-datatable-column>
                 </ngx-datatable>

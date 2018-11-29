@@ -34,6 +34,17 @@ export class ServicesHttpService {
   .get(this.rest+"/api/tarifas"); 
  }
 
+ traerProfesoresByTemaMateria(idTema:number,idMateria:number){
+  return this.http
+  .get(this.rest+"/api/profesores/materias/"+idMateria+"/temas/"+idTema); 
+
+ }
+ traerProfesoresByMateria(idMateria:number){
+  return this.http
+  .get(this.rest+"/api/profesores/materias/"+idMateria); 
+
+ }
+
 
  puntuar(puntuacion:Puntuacion){
     return this.http.post<Puntuacion>(this.rest +"/api/puntuaciones", puntuacion)
